@@ -25,13 +25,13 @@ function Q = numericIntegrateFunc1(func, domain, N, method, aux)
     switch (upper(method))
         case {'LEFT'}
             % Evaluate function at left points
-            f = arrayfun(func, x(1:end-1));
+            f = func(x(1:end-1));
             
             % Compute Q
             Q = h*sum(f);
         case 'RIGHT'
             % Evaluate funciton at right points
-            f = arrayfun(func, x(2:end));
+            f = func(x(2:end));
             
             % Compute Q 
             Q = h*sum(f);
@@ -43,13 +43,13 @@ function Q = numericIntegrateFunc1(func, domain, N, method, aux)
             x_mid = (x(1:end-1)+x(2:end)) / 2;
             
             % Evaluate function at midpoints
-            f = arrayfun(func, x_mid);
+            f = func(x_mid);
             
             % Compute Q
             Q = h * sum(f);
         case {'TRAPEZOIDAL', 'TRAP'}
             % Evaluate function at x
-            f = arrayfun(func, x);
+            f = func(x);
             
             % Compute Q
             Q = h/2*(f(1)+f(end)) + h/2*sum(2*f(2:end-1));
@@ -58,7 +58,7 @@ function Q = numericIntegrateFunc1(func, domain, N, method, aux)
             if (mod(N, 2)), error('Number of segments must be even for Simpson''s rule!'); end
             
             % Evaluate function at x
-            f = arrayfun(func, x);
+            f = func(x);
             
             % Simpson's rule Q = h/3 * (f_0 + 4*sum(f_odd) + 2*sum(f_even) + f_end)
             Q = h/3 * (f(1) + 4*sum(f(2:2:end-1)) + 2*sum(f(3:2:end-2)) + f(end));

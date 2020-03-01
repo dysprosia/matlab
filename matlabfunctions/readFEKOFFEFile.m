@@ -2,16 +2,14 @@
 % This function reads FEKO ffe file.
 %
 % Inputs:
-%   varargin(1): fullfile(idir, ifile) or just idir.
-%   varargin(2): [optional] if just idir provided for varargin(1), then varargin(2) is ifile.
+%   ipath: filepath to ffe file.
+%   verbose: boolean to set output. default false.
 % Outputs:
 %   data: data in structure.
 %
-function data = readFEKOFFEFile(varargin)
+function data = readFEKOFFEFile(ipath, verbose)
     %% Input handling
-    if (nargin==2), ipath = fullfile(varargin{:});
-    else, ipath = varargin{1}; 
-    end
+    if (nargin == 1), verbose = false; end
     
     %% Read in data
     fid = fopen(ipath, 'r');
@@ -29,7 +27,7 @@ function data = readFEKOFFEFile(varargin)
     
     %% Process chunks
     chunks_args = arrayfun(@(x) x, chunks, 'uni', 0);
-    chunks_processed = verboseFor(@processChunk, chunks_args);
+    chunks_processed = verboseFor(@processChunk, chunks_args, verbose);
     chunks_processed = vertcat(chunks_processed{:});
     
     %% Post-processing

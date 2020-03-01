@@ -115,6 +115,9 @@ function h = plotPattern(X, Y, pat, varargin)
     shading(shad);
     colormap(cmap);
     colorbar();
-    if (~isnan(scale)), caxis([pat_max-scale pat_max]); end
+    try
+        if (~isnan(scale)), caxis([pat_max-scale pat_max]); end
+    catch
+    end
     view(2);
 end

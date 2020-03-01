@@ -2,7 +2,7 @@
 % This function reads FEKO 2D data exported as dat.
 %
 % Inputs:
-%   icsv: path to input DAT.
+%   idat: path to input DAT.
 % Outputs:
 %   data: data in struct format.
 %
