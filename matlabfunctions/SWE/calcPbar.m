@@ -18,7 +18,7 @@ function [P0, P1, P2] = calcPbar(n, m, th)
     % P
     mm = (0:n)';
     fac = (-1).^mm;                 % (-1)^m to match with Hansen's definition
-    P = fac .* legendre(n, cos(th));        
+    P = fac .* legendre(n, cos(th));
     
     % P
     P0 = squeeze(P(m+1, colons{:}));

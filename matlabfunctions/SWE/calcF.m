@@ -43,11 +43,11 @@ function F = calcF(c, s, m, n, k, r, theta, phi)
     if (s == 1)
         Frho = zeros(size(th));
         Fth = Fconst * z .* 1j*P1 .* exp(1j*m*ph);
-        Fph = Fconst * -z .* P2 .* exp(1j*m*ph); 
+        Fph = Fconst * -z .* P2 .* exp(1j*m*ph);
     elseif (s == 2)
-        Frho = Fconst * -n*(n+1)/k/r * z * P0 .* exp(1j*m*ph);
-        Fth = Fconst * -1/k/r * d_uz * P2 .* exp(1j*m*ph);
-        Fph = Fconst * -1/k/r * d_uz * 1j*P1 .* exp(1j*m*ph);
+        Frho = -Fconst * n*(n+1)/k/r * z * P0 .* exp(1j*m*ph);
+        Fth = -Fconst * 1/k/r * d_uz * P2 .* exp(1j*m*ph);
+        Fph = -Fconst * 1/k/r * d_uz * 1j*P1 .* exp(1j*m*ph);
     end
     
     % Return

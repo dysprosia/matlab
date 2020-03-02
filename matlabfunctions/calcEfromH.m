@@ -7,8 +7,13 @@
 %   E: E vector at theta and phi points
 %
 function E = calcEfromH(H, eta)
+    % Do k, r, eta exist in H?
+    fns = fieldnames(H);
+
     % Eta
-    if (~exist('eta', 'var')), eta = 120*pi; end
+    if (~exist('eta', 'var') && ~ismember('eta', fns)), eta = 120*pi;
+    elseif (ismember('eta', fns)), eta = H.eta;
+    end
 
     % Calculate
     E = struct('Theta', H.Theta, ...
@@ -16,4 +21,7 @@ function E = calcEfromH(H, eta)
                'Etheta', eta*H.Hphi, ...
                'Ephi', eta*H.Htheta ...
               );
+	if (ismember('k', fns)), E.k = E.k; end
+    if (ismember('r', fns)), E.r = E.r; end
+    E.eta = eta;
 end
